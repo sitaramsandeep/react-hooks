@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import './App.css';
 
-function App({ name }) {
+function App() {
+  const [status, setStatus] = useState("Not Delivered")
   return (
     <div className="App">
-      <h1>Hello {name}!</h1>
+      <h1>The package is:{status}</h1>
+      <button onClick={() => setStatus("Delivered")}>Deliver</button>
     </div>
   );
 }
