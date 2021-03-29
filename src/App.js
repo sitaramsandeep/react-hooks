@@ -1,18 +1,35 @@
 import { useReducer } from 'react';
 import './App.css';
 
+const initialState = {
+  message: "Hi"
+}
+
+function reducer(state, action) {
+  switch(action.type) {
+    case "yell":
+      return {
+        message: `HEY!`
+      }
+    case "whisper":
+      return {
+        message: `excuse me`
+      }
+  }
+
+}
+
 function App() {
-  const [number, setNumber] = useReducer((number, newNumber) => number + newNumber ,0)
-  const [checked, toggle] = useReducer(
-    (checked) => !checked,
-    false
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState
   )
   return (
-    <div>
-      <h1 onClick={() => setNumber(1)}>{number}</h1>
-      <input type="checkbox" value={checked} onChange={toggle}/>
-      <p>{checked ? "checked" : "not checked"}</p>
-    </div>
+    <>
+      <p>Message: {state.message}</p>
+      <button onClick={() => dispatch({type:"yell"})}>YELL</button>
+      <button onClick={() => dispatch({type:"whisper"})}>Whisper</button>
+    </>
   )
 }
 
